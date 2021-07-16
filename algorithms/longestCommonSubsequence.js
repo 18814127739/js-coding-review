@@ -3,7 +3,7 @@
  * 找出两个字符串序列的最长子序列的长度
  * 最长序列是指：在两个字符串序列中以相同顺序出现，但不要求连续的字符串序列
  */
-function longestCommonSubsequence(wordX, wordY) {
+function lcs(wordX, wordY) {
 	const m = wordX.length;
 	const n = wordY.length;
 	const l = []; // 记忆矩阵
@@ -36,11 +36,13 @@ function longestCommonSubsequence(wordX, wordY) {
 	}
 
 	let subSeq = ''; // 公共子序列
+	const subSeqIndex = []; // 子序列中每个字符在str1中的索引
 	let a = m;
 	let b = n;
 	while (solution[a][b] !== '0') {
 		if (solution[a][b] === 'diagonal') {
 			subSeq = wordX[a - 1] + subSeq;
+			subSeqIndex.unshift(a - 1);
 			a--;
 			b--;
 		} else if (solution[a][b] === 'top') {
@@ -52,7 +54,8 @@ function longestCommonSubsequence(wordX, wordY) {
 
 	return {
 		length: l[m][n],
-		subSeq
+		subSeq,
+		subSeqIndex,
 	};
 }
 
@@ -64,6 +67,7 @@ const wordY = 'abcadf';
 
 const {
 	length,
-	subSeq
+	subSeq,
+	subSeqIndex
 } = lcs(wordX, wordY);
-console.log(length, subSeq); // 4, abad
+console.log(length, subSeq, subSeqIndex); // 4, abad

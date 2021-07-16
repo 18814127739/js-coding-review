@@ -2,52 +2,53 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
 </head>
 
 <body>
-  <script src="basics/debounce_throttle.js"></script>
-  <script>
-    window.onload = function () {
-      const input = document.getElementById('input');
-      input.addEventListener('input', debounce((e) => {
-        console.log(e.target.value);
-      }));
+	<script src="basics/debounce_throttle.js"></script>
+	<script>
+		window.onload = function () {
+			const input = document.getElementById('input');
+			input.addEventListener('input', debounce((e) => {
+				console.log(e.target.value);
+			}));
 
-      const btn = document.getElementById('btn');
-      btn.addEventListener('click', throttle((e) => {
-        console.log('btn');
-      }));
-    }
+			const btn = document.getElementById('btn');
+			btn.addEventListener('click', throttle((e) => {
+				console.log('btn');
+			}));
+		}
 
-    window.addEventListener('hashchange', (e) => {
-      console.log(window.location.hash);
-    });
+		window.addEventListener('hashchange', (e) => {
+			console.log(window.location.hash);
+		});
 
-    window.addEventListener('popstate', (e) => {
-      console.log(history.length);
-      console.log(e);
-    });
+		window.addEventListener('popstate', (e) => {
+			console.log(history.length);
+			console.log(e);
+		});
 
-    function push(path) {
-      history.pushState({
-        name: 'tjm'
-      }, '', path);
-    }
+		function push(path) {
+			history.pushState({
+				name: 'tjm'
+			}, '', path);
+		}
 
-    function replace(path) {
-      history.replaceState({
-        name: 's',
-      }, '', path);
-    }
+		function replace(path) {
+			history.replaceState({
+				name: 's',
+			}, '', path);
+		}
 
 		let num = 0;
+
 		function count() {
-			if(num <= 100) {
-				num ++;
+			if (num < 100) {
+				num++;
 				console.log(num);
 				requestAnimationFrame(count);
 				// requestIdlecallback(count);
@@ -55,26 +56,27 @@
 		}
 		requestAnimationFrame(count);
 		// requestIdlecallback(count);
-  </script>
-  <h1 style="margin-left: 2vw;">打开控制台</h1>
-  <input id="input" placeholder="输入防抖" />
-  <button id="btn">点击节流,每秒最多执行1次</button>
 
-  <h3>hash路由</h3>
-  <a href="#/a">
-    <p>a</p>
-  </a>
-  <a href="#/b">
-    <p>b</p>
-  </a>
+	</script>
+	<h1 style="margin-left: 2vw;">打开控制台</h1>
+	<input id="input" placeholder="输入防抖" />
+	<button id="btn">点击节流,每秒最多执行1次</button>
 
-  <h3>history路由</h3>
-  <a href="javascript:void(0)" onclick="push('/a')">
-    <p>a</p>
-  </a>
-  <a href="javascript:void(0)" onclick="push('/b')">
-    <p>b</p>
-  </a>
+	<h3>hash路由</h3>
+	<a href="#/a">
+		<p>a</p>
+	</a>
+	<a href="#/b">
+		<p>b</p>
+	</a>
+
+	<h3>history路由</h3>
+	<a href="javascript:void(0)" onclick="push('/a')">
+		<p>a</p>
+	</a>
+	<a href="javascript:void(0)" onclick="push('/b')">
+		<p>b</p>
+	</a>
 </body>
 
 </html>

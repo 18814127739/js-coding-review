@@ -1,0 +1,77 @@
+<!--
+ * @Description: 用lcs算法实现分词模糊搜索功能
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      padding-top: 30px;
+    }
+  </style>
+</head>
+
+<body>
+  <script src="algorithms/longestCommonSubsequence.js"></script>
+  <script src="basics/debounce_throttle.js"></script>
+  <script>
+    window.onload = function () {
+      const $input = document.getElementById('input');
+      const $searchList = document.getElementById('search-list');
+      const allData = [...document.getElementsByTagName('p')].map(c => c.innerHTML);
+
+      function onInputChange(e) {
+        // 清空上一次搜索结果
+        $searchList.innerHTML = null;
+        const value = e.target.value.trim();
+
+        allData.forEach(item => {
+          const {
+            length,
+            subSeq,
+            subSeqIndex
+          } = lcs(item.trim(), value);
+          if (length === value.length) {
+            // 最长子序列长度等于输入长度时代表命中
+            const $li = document.createElement('li');
+            item.split('').forEach((ch, i) => {
+              const $span = document.createElement('span');
+              const $text = document.createTextNode(ch);
+              $span.appendChild($text);
+              if (subSeqIndex.length && subSeqIndex[0] === i) {
+                // 把结果中匹配的字符标记为红色
+                subSeqIndex.shift();
+                $span.style.color = 'red';
+              }
+              $li.appendChild($span);
+            });
+            $searchList.appendChild($li);
+          }
+        });
+      }
+
+      $input.addEventListener('input', throttle(onInputChange));
+    }
+  </script>
+  <div>
+    <input id="input" />
+    <div id="search-list"></div>
+    <br />
+    <div>
+      <p>this is a js_error</p>
+      <p>this is an img_load_error</p>
+      <p>this is a resource_load_error</p>
+      <p>this is a type_error</p>
+      <p>unknown error</li>
+    </div>
+  </div>
+</body>
+
+</html>
