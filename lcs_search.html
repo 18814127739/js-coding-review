@@ -8,7 +8,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <title>lcs算法实现分词模糊搜索</title>
   <style>
     body {
       display: flex;
@@ -25,12 +25,15 @@
     window.onload = function () {
       const $input = document.getElementById('input');
       const $searchList = document.getElementById('search-list');
-      const allData = [...document.getElementsByTagName('p')].map(c => c.innerHTML);
+      const allData = [...document.getElementsByTagName('p')].map(
+        c => c.innerHTML
+      );
 
       function onInputChange(e) {
         // 清空上一次搜索结果
         $searchList.innerHTML = null;
         const value = e.target.value.trim();
+        if(!value) return;
 
         allData.forEach(item => {
           const {
@@ -70,6 +73,7 @@
       <p>this is a resource_load_error</p>
       <p>this is a type_error</p>
       <p>unknown error</li>
+      <p>this is javascript</p>
     </div>
   </div>
 </body>
