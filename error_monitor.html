@@ -11,60 +11,106 @@
   <title>前端异常监控</title>
   <link rel="stylesheet" href="style.css" />
   <script>
-    // addEventListener的第三个参数 一定要是true,表示在捕获阶段触发
+    // 捕获js异常
+    window.onerror = function (msg, url, row, col, error) {
+      console.log('js执行异常---------------------------');
+      const errMsg = {
+        type: 'javascript',
+        msg,
+        url,
+        row,
+        col,
+        error: error.stack,
+        time: Date.now(),
+      };
+      console.table(errMsg);
+    };
+
+    // addEventListener的第三个参数 一定要是true, 表示在捕获阶段触发
     // 如果改成false就是冒泡阶段，是获取不到错误事件的
+    // 可以捕获 资源加载异常 & js异常， 但使用onerror来捕获js异常提取信息更方便
     window.addEventListener('error', function (e) {
       const target = e.target || e.srcElement;
       const isEleError = target instanceof HTMLElement;
-      if (!isEleError) {
-        console.log('js执行异常---------------------------');
-        const {
-          message,
-          stack
-        } = e.error;
-        console.log('msg:', stack);
-        console.log('stack:', stack);
-      } else {
-        console.log('资源加载异常---------------------------');
-        const {
-          type,
-          timeStamp,
-          target
-        } = e;
-        const {
-          localName,
-          outerHTML,
-          tagName,
-          src
-        } = target;
-        let sourceUrl = '';
-        if (localName === 'link') {
-          sourceUrl = target.href;
-        } else if (localName === 'script') {
-          sourceUrl = target.src;
-        }
-        console.log(target);
-
-        if (navigator.sendBeacon) {
-          navigator.sendBeacon(`http://localhost:3000?data=${encodeURIComponent(sourceUrl)}`);
-        } else {
-          const img = new Image();
-          img.onload = null;
-          img.onerror = null;
-          img.src = `http://localhost:3000?data=${encodeURIComponent(sourceUrl)}`
-        }
+      // if (!isEleError) {
+      //   console.log('js执行异常---------------------------');
+      //   const {
+      //     message,
+      //     stack
+      //   } = e.error;
+      //   console.log('stack:', stack);
+      // } else {
+      const {
+        type,
+        timeStamp,
+      } = e;
+      const {
+        localName,
+        outerHTML,
+        tagName,
+        src
+      } = target;
+      let sourceUrl = '';
+      if (localName === 'link') {
+        console.log('link资源加载异常---------------------------');
+        sourceUrl = target.href;
+      } else if (localName === 'script') {
+        console.log('script资源加载异常---------------------------');
+        sourceUrl = target.src;
       }
+
+      const errMsg = {
+        type: 'resource',
+        subType: localName,
+        sourceUrl,
+        time: Date.now(),
+        timeStamp,
+      };
+      console.table(errMsg);
+
+      if (navigator.sendBeacon) {
+        navigator.sendBeacon(`http://localhost:3000?data=${encodeURIComponent(sourceUrl)}`);
+      } else {
+        const img = new Image();
+        img.onload = null;
+        img.onerror = null;
+        img.src = `http://localhost:3000?data=${encodeURIComponent(sourceUrl)}`;
+      }
+      // }
     }, true);
+
+    window.addEventListener('unhandledrejection', function (e) {
+      // console.log('rejecttion', e);
+      console.log('promise reject异常---------------------------');
+      const {
+        timeStamp,
+        reason
+      } = e;
+      const errMsg = {
+        type: 'promise',
+        msg: reason ? (reason.stack || reason) : 'no reason',
+        time: Date.now(),
+        timeStamp,
+      };
+      console.table(errMsg);
+    });
+
+    const promise = new Promise((resolve, reject) => {
+      reject('fetch fail');
+    });
+
+    promise.then((res) => {
+      console.log(res);
+    });
 
     // 测试js运行异常, 执行一个没定义的函数
     testError();
 
   </script>
+  <script src="jquery.js"></script>
 </head>
 
 <body>
-  <script src="qqq.js"></script>
-  <script src="asd.js"></script>
 </body>
 
 </html>
