@@ -15,12 +15,13 @@
       justify-content: center;
       padding-top: 30px;
     }
+
   </style>
 </head>
 
 <body>
   <script src="algorithms/longestCommonSubsequence.js"></script>
-  <script src="basics/debounce_throttle.js"></script>
+  <script src="basics/debounce-throttle.js"></script>
   <script>
     window.onload = function () {
       const $input = document.getElementById('input');
@@ -33,7 +34,7 @@
         // 清空上一次搜索结果
         $searchList.innerHTML = null;
         const value = e.target.value.trim();
-        if(!value) return;
+        if (!value) return;
 
         allData.forEach(item => {
           const {
@@ -62,6 +63,7 @@
 
       $input.addEventListener('input', throttle(onInputChange));
     }
+
   </script>
   <div>
     <input id="input" />
@@ -73,7 +75,7 @@
       <p>this is a resource_load_error</p>
       <p>this is a type_error</p>
       <p>unknown error</li>
-      <p>this is javascript</p>
+        <p>this is javascript</p>
     </div>
   </div>
 </body>

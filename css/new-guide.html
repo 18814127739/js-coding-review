@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>新手指引</title>
+  <style>
+    .wrap {
+      margin-top: 70px;
+      text-align: center;
+    }
+
+    .mask {
+      position: fixed;
+      top: 50px;
+      left: calc(50% - 150px);
+      width: 300px;
+      height: 200px;
+      background: transparent;
+      border: 3px dashed yellow;
+      z-index: 999;
+      outline: 9999px solid rgba(0, 0, 0, .25);
+    }
+
+    button {
+      position: fixed;
+      top: 280px;
+      z-index: 999;
+      left: 50%;
+      width: 100px;
+      margin-left: -50px;
+    }
+
+  </style>
+
+  <script>
+    function next() {
+      const mask = document.getElementsByClassName('mask')[0];
+      const {
+        top,
+        left
+      } = mask.getBoundingClientRect();
+
+      console.log(mask.getBoundingClientRect());
+      mask.style.top = `${parseInt(top) + 20}px`;
+      mask.style.left = `${parseInt(left) + 20}px`;
+    }
+
+  </script>
+</head>
+
+<body>
+  <div class="wrap">
+    <h1>哈哈哈哈</h1>
+    <h2>嘻嘻嘻嘻</h2>
+    <h3>呵呵呵呵</h3>
+  </div>
+  <div class="mask">
+  </div>
+  <button onclick="next()">下一步</button>
+</body>
+
+</html>
