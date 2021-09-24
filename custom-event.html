@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <script>
+    document.addEventListener('event', (e) => {
+      alert(e.desc);
+      console.log(e);
+      console.log(e.data);
+      console.log(e.detail);
+    });
+
+    function execEvent() {
+      const event = new Event('event', {
+        detail: {
+          name: 'test'
+        },
+      });
+      // 给event实例添加data属性，传递业务数据
+      event.data = {
+        a: 1,
+        b: 2
+      };
+      event.desc = '由Event触发';
+      document.dispatchEvent(event);
+    }
+
+    function execCustomEvent() {
+      const event = new CustomEvent('event', {
+        // CustomEvent 可以通过给第二个参数设置 detail 属性传递业务数据， 而Event不行
+        detail: {
+          name: 'test'
+        },
+      });
+      // CustomEvent同样可以给实例添加额外属性传递数据 
+      event.desc = '由CustomEvent触发';
+      document.dispatchEvent(event);
+    }
+
+  </script>
+</head>
+
+<body>
+  <button id="btn1" onclick="execEvent()">Event触发自定义事件</button>
+  <button id="btn2" onclick="execCustomEvent()">CustomEvent触发自定义事件</button>
+</body>
+
+</html>
