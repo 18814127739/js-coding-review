@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <style>
+    .diamond {
+      clip-path: polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+      transition: clip-path .5s;
+    }
+
+    .diamond:hover {
+      clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+    }
+
+    .clip-corner {
+      background: #aaeeee;
+      clip-path: polygon(20px 0, calc(100% - 20px) 0, 100% 20px, 100% calc(100% - 20px),
+          calc(100% - 20px) 100%, 20px 100%, 0 calc(100% - 20px), 0 20px);
+    }
+
+  </style>
+</head>
+
+<body>
+  <img class="diamond" src="../assets/test.jpg" alt="" />
+  <img class="clip-corner" src="../assets/test.jpg" alt="" />
+
+</body>
+
+</html>

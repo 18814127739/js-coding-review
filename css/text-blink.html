@@ -1,0 +1,45 @@
+<!--
+ * @Description: 闪烁动画
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .text1.highlight {
+      animation: .5s blink-smooth 6 alternate;
+    }
+
+    @keyframes blink-smooth {
+      to {
+        color: transparent;
+      }
+    }
+
+    .text2.highlight {
+      animation: 1s blink 3 steps(1);
+    }
+
+    @keyframes blink {
+      50% {
+        color: transparent;
+      }
+    }
+
+  </style>
+</head>
+
+<body>
+  <h1 class="text1 highlight">
+    一闪一闪亮晶晶(平滑)
+  </h1>
+  <h1 class="text2 highlight">
+    一闪一闪亮晶晶(硬闪)
+  </h1>
+</body>
+
+</html>

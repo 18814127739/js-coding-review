@@ -1,0 +1,48 @@
+<!--
+ * @Description: 环形平移
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>环形平移</title>
+  <style>
+    .circle {
+      margin: 3em auto;
+      padding: 10px;
+      width: 300px;
+      height: 300px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: yellow;
+      border-radius: 160px;
+    }
+
+    img {
+      animation: spin 5s infinite linear;
+    }
+
+    @keyframes spin {
+      from {
+        transform: rotate(0turn) translateY(-150px) translateY(50%) rotate(1turn);
+      }
+
+      to {
+        transform: rotate(1turn) translateY(-150px) translateY(50%) rotate(0turn);
+      }
+    }
+
+  </style>
+</head>
+
+<body>
+  <div class="circle">
+    <img src="../assets/icon.png" />
+  </div>
+</body>
+
+</html>

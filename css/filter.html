@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+
+  <style>
+    .img1 {
+      filter: sepia(1) saturate(4) hue-rotate(295deg);
+      transition: .5s filter;
+    }
+
+    .img1:hover,
+    .img1:focus {
+      filter: none;
+    }
+
+  </style>
+</head>
+
+<body>
+  <img class="img1" src="../assets/test.jpg" alt="" />
+
+  <main>
+    <div class="content"></div>
+  </main>
+</body>
+
+</html>

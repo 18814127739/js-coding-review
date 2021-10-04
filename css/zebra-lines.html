@@ -1,0 +1,38 @@
+<!--
+ * @Description: 文本斑马条纹
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .text {
+      margin: 50px auto 0;
+      padding: .5em;
+      width: 400px;
+      line-height: 1.5;
+      background: beige;
+      background-size: auto 3em;
+      /* 在解析background-position时以content box的外沿作为基准，而不是默认的padding box外沿 */
+      background-origin: content-box;
+      background-image: linear-gradient(rgba(0, 0, 0, .2) 50%, transparent 0);
+      font-size: 20px;
+    }
+
+  </style>
+</head>
+
+<body>
+  <div class="text">
+    撒打算打算打算打色企鹅请问请问撒大自行车自行车企鹅请问撒打算大自行车自行车请问请问去
+    撒打算大的撒大自行车自行车撒打算打算大企鹅请问撒打算打算打算打色企鹅请问请问撒大自行车自行车企鹅请问撒打算大自行车自行车请问请问去
+    撒打算大的撒大自行车自行车撒打算打算大企鹅请问撒打算打算打算打色企鹅请问请问撒大自行车自行车企鹅请问撒打算大自行车自行车请问请问去
+    撒打算大的撒大自行车自行车撒打算打算大企鹅请问
+  </div>
+</body>
+
+</html>

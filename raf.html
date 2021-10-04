@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    #rafDiv,
+    #mockRafDiv {
+      position: fixed;
+      left: 100px;
+      top: 60px;
+      width: 100px;
+      height: 100px;
+      background: red;
+    }
+
+    #mockRafDiv {
+      top: 180px;
+    }
+
+  </style>
+</head>
+
+<body>
+  <script>
+    // setInterval 模拟 raf
+    function mockRaf() {
+      console.log('mockRaf start', Date.now());
+
+      const timer = setInterval(() => {
+        const ele = document.getElementById('mockRafDiv');
+        const {
+          left
+        } = ele.getBoundingClientRect();
+        if (left === 400) {
+          console.log('mockRaf end', Date.now());
+          clearInterval(timer);
+        }
+        const newLeft = `${parseInt(left) + 1}px`;
+        ele.style.left = newLeft;
+      }, 17);
+    }
+
+    function raf() {
+      console.log('raf start', Date.now());
+
+      function _raf() {
+        const ele = document.getElementById('rafDiv');
+        const {
+          left
+        } = ele.getBoundingClientRect();
+        if (left < 400) {
+          const newLeft = `${parseInt(left) + 1}px`;
+          ele.style.left = newLeft;
+          requestAnimationFrame(_raf);
+        } else {
+          console.log('raf end', Date.now());
+        }
+      }
+      requestAnimationFrame(_raf);
+    }
+
+  </script>
+
+  <button onclick="raf()">raf</button>
+  <button onclick="mockRaf()">mockRaf</button>
+  <div id="rafDiv"></div>
+  <div id="mockRafDiv"></div>
+
+</body>
+
+</html>
