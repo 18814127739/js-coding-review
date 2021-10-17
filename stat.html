@@ -1,0 +1,43 @@
+<!--
+ * @Description: 埋点
+-->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script>
+    // document.addEventListener('click', function (e) {
+    //   const el = e.target;
+    //   const stat = el.getAttribute('stat');
+    //   console.log(stat);
+    // });
+
+    window.onload = function () {
+      const statEles = document.querySelectorAll('[stat]');
+      console.log(statEles);
+
+      const statArr = [].slice.call(statEles);
+      statArr.forEach(c => {
+        c.addEventListener('click', (e) => {
+          const stat = e.target.getAttribute('stat');
+          console.log(`${location.href}: ${e.target.localName}-${stat}`);
+        });
+      })
+    }
+
+  </script>
+</head>
+
+<body>
+  <button stat="1">btn1</button>
+  <button stat="2">btn2</button>
+  <button stat="3">btn3</button>
+  <button>no stat</button>
+  <h1 stat="1">我是标题哈哈哈</h1>
+</body>
+
+</html>
