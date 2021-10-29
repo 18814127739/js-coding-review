@@ -6,7 +6,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Document</title>
-
+	<script src="https://cdn.bootcdn.net/ajax/libs/vConsole/3.9.1/vconsole.min.js"></script>
 	<style>
 		.btn-disabled {
 			cursor: not-allowed;
@@ -18,6 +18,9 @@
 <body>
 	<script src="basics/debounce-throttle.js"></script>
 	<script>
+		// 初始化VConsole
+		const vConsole = new VConsole();
+
 		window.onload = function () {
 			const input = document.getElementById('input');
 			input.addEventListener('input', debounce((e) => {
@@ -84,7 +87,6 @@
 		<p>b</p>
 	</a>
 	<button class="btn-disabled" disabled="true">禁用</button>
-
 </body>
 
 </html>

@@ -25,6 +25,16 @@
         c.addEventListener('click', (e) => {
           const stat = e.target.getAttribute('stat');
           console.log(`${location.href}: ${e.target.localName}-${stat}`);
+
+          const {
+            sendBeacon
+          } = window.navigator;
+          if (sendBeacon) {
+            // sendBeacon('/api/log', data)
+          } else {
+            // const img = new Image();
+            // img.src = data;
+          }
         });
       })
     }
