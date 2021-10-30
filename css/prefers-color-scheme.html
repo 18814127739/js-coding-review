@@ -7,37 +7,81 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>切换黑暗模式</title>
   <style>
+    body {
+      padding: 1rem calc(50% - 450px);
+      background: #eee;
+    }
+
+    h3,
+    p {
+      color: #333;
+    }
+
+    /* css实现方式，通过media给不同shceme下的class设置不同样式 */
+    /* @media (prefers-color-scheme: light) {
+      body {
+        background: #eee;
+      }
+
+      h3,
+      p {
+        color: #333;
+      }
+    }
+
     @media (prefers-color-scheme: dark) {
       body {
         background: #333;
       }
 
-      .wrap h3,
-      .wrap p {
+      h3,
+      p {
         color: #eee;
       }
+    } */
+
+
+    .light {
+      background: #eee;
     }
 
-    @media (prefers-color-scheme: light) {
-      body {
-        background: #eee;
-      }
+    .light h3,
+    .light p {
+      color: #333;
+    }
 
-      .wrap h3,
-      .wrap p {
-        color: #333;
-      }
+    .dark {
+      background: #333;
+    }
+
+    .dark h3,
+    .dark p {
+      color: #eee;
     }
 
   </style>
+
+  <script>
+    window.onload = function () {
+      // js实现方式， 
+      const media = matchMedia(`(prefers-color-scheme: dark)`);
+      if (media.matches) {
+        // 如果当前就是黑暗主题，则直接设置黑暗样式
+        document.body.setAttribute('class', 'dark');
+      }
+      media.addEventListener('change', function (e) {
+        // 监听 prefers-color-scheme:dark 变化(浏览器切换主题时触发)，添加不同样式
+        document.body.setAttribute('class', e.matches ? 'dark' : 'light');
+      });
+    }
+
+  </script>
 </head>
 
 <body>
-  <div class="wrap">
-    <h3>标题</h3>
-    <p>我是文本我是文本我是文本我是文本我是文本我是文本我是文本我是文本</p>
-    <p>我是文本我是文本我是文本我是文本我是文本我是文本我是文本我是文本</p>
-  </div>
+  <h3>标题</h3>
+  <p>我是文本我是文本我是文本我是文本我是文本我是文本我是文本我是文本</p>
+  <p>我是文本我是文本我是文本我是文本我是文本我是文本我是文本我是文本</p>
 </body>
 
 </html>
