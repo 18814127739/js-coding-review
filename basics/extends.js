@@ -4,10 +4,10 @@
 
 // 父类
 function Parent(name) { // 给构造函数添加参数
-  this.name = name;
-  this.print = function () {
-    console.log(this.name);
-  }
+	this.name = name;
+	this.print = function () {
+		console.log(this.name);
+	}
 }
 Parent.prototype.age = 30; // 给构造函数添加原型属性
 
@@ -21,7 +21,7 @@ Parent.prototype.age = 30; // 给构造函数添加原型属性
  *　　　 3、所有新实例都会共享父类实例的属性。（原型上的属性是共享的，一个实例修改了原型属性，另一个实例的原型属性也会被修改！）
  */
 function Child1() {
-  this.name = 'tom';
+	this.name = 'tom';
 }
 Child1.prototype = new Parent(); // 主要, 重写了子类的原型
 Child1.prototype.constructor = Child1; // 一定要把子类原型上的contructor重新指向子类
@@ -44,7 +44,7 @@ console.log(child1 instanceof Parent); // true
  *      3、每个新实例都有父类构造函数的副本，臃肿。
  */
 function Child2() {
-  Parent.call(this, 'jack'); // 重点
+	Parent.call(this, 'jack'); // 重点
 }
 
 const child2 = new Child2();
@@ -61,7 +61,7 @@ console.log(child2 instanceof Parent); // false
  * 缺点：调用了两次父类构造函数,生成了两份实例（耗内存），子类的构造函数会代替原型上的那个父类构造函数。
  */
 function Child3(name) {
-  Parent.call(this, name); // 构造函数继承
+	Parent.call(this, name); // 构造函数继承
 }
 Child3.prototype = new Parent(); // 原型链继承
 Child3.prototype.constructor = Child3;
@@ -80,14 +80,14 @@ console.log(child3 instanceof Parent); // true
  */
 // 寄生
 function createObj(parentPrototype) {
-  function Fn() {}
-  Fn.prototype = obj; // 继承了传入的参数
-  // 返回的实例的原型继承了父类的原型属性
-  return new Fn(); // 返回函数实例
+	function Fn() { }
+	Fn.prototype = parentPrototype; // 继承了传入的参数
+	// 返回的实例的原型继承了父类的原型属性
+	return new Fn(); // 返回函数实例
 }
 // 组合
 function Child4(name) {
-  Parent.call(this, name); // 继承父类构造函数的属性
+	Parent.call(this, name); // 继承父类构造函数的属性
 } // 解决了两次调用父类构造函数的缺点
 Child4.prototype = createObj(Parent.prototype); // 继承了con实例
 Child4.prototype.constructor = Child4; // 修复实例
