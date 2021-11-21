@@ -18,22 +18,21 @@
 
     window.onload = function () {
       const statEles = document.querySelectorAll('[stat]');
-      console.log(statEles);
-
       const statArr = [].slice.call(statEles);
+      // console.log(statArr);
       statArr.forEach(c => {
         c.addEventListener('click', (e) => {
           const stat = e.target.getAttribute('stat');
-          console.log(`${location.href}: ${e.target.localName}-${stat}`);
+          const data = encodeURIComponent(`${location.href}: ${e.target.localName}-${stat}`);
+          console.log(data);
 
-          const {
-            sendBeacon
-          } = window.navigator;
-          if (sendBeacon) {
-            // sendBeacon('/api/log', data)
+          if (window.navigator.sendBeacon) {
+            const formData = new FormData();
+            formData.set('data', data);
+            navigator.sendBeacon('/api/log', formData);
           } else {
-            // const img = new Image();
-            // img.src = data;
+            const img = new Image();
+            img.src = `/api/log?data=${data}`;
           }
         });
       })
