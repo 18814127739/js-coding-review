@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>图像边框</title>
+  <style>
+    body {
+      padding: 20px;
+    }
+
+    div {
+      padding: 10px;
+      height: 200px;
+      width: 400px;
+      border: 12px solid transparent;
+      background: linear-gradient(rgba(255, 255, 0, .2), rgba(255, 255, 255, .2)), url(./img.jpg);
+      background-size: cover;
+      background-clip: padding-box, border-box;
+      background-origin: border-box;
+    }
+
+    /* 伪类实现 */
+    /* div {
+      position: relative;
+      padding: 10px;
+      width: 376px;
+      height: 176px;
+      background: linear-gradient(rgba(255, 255, 0, .2), rgba(255, 255, 255, .2));
+    }
+
+    div::before {
+      content: "";
+      position: absolute;
+      top: -12px;
+      left: -12px;
+      bottom: -12px;
+      right: -12px;
+      background: url(./img.jpg);
+      background-size: cover;
+      z-index: -1;
+    } */
+
+  </style>
+</head>
+
+<body>
+  <div>nice</div>
+</body>
+
+</html>

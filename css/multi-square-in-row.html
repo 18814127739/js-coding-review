@@ -19,7 +19,7 @@
     }
 
     .list {
-      width: calc(100% + 10px);
+      width: 100%;
       display: flex;
     }
 
@@ -28,19 +28,22 @@
       padding-right: 10px;
     }
 
+    .wrap:last-child {
+      padding-right: 0;
+    }
+
     .item {
       position: relative;
       width: 100%;
       height: 0;
       /* 关键样式 */
       padding-bottom: 100%;
+      background: greenyellow;
     }
 
     .content {
+      margin: 10px 10px 0;
       position: absolute;
-      width: 100%;
-      height: 100%;
-      background: greenyellow;
     }
 
   </style>
@@ -52,22 +55,22 @@
     <div class="list">
       <div class="wrap">
         <div class="item">
-          <div class="content"></div>
+          <div class="content">1231231</div>
         </div>
       </div>
       <div class="wrap">
         <div class="item">
-          <div class="content"></div>
+          <div class="content">1231231</div>
         </div>
       </div>
       <div class="wrap">
         <div class="item">
-          <div class="content"></div>
+          <div class="content">1231231</div>
         </div>
       </div>
       <div class="wrap">
         <div class="item">
-          <div class="content"></div>
+          <div class="content">1231231</div>
         </div>
       </div>
     </div>
