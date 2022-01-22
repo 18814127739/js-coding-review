@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>sendBeacon</title>
+
+  <script>
+    function request() {
+      const id = 104;
+      navigator.sendBeacon(
+        `http://192.168.3.6:3000/testBeacon?id=${id}`,
+        JSON.stringify({
+          id
+        })
+      );
+    }
+    window.addEventListener(
+      'unload',
+      request,
+      false
+    );
+
+  </script>
+</head>
+
+<body>
+  <button onclick="request()">sendBeacon</button>
+</body>
+
+</html>
