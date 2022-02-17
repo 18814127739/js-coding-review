@@ -12,6 +12,30 @@
 			cursor: not-allowed;
 		}
 
+		#ani {
+			color: red;
+			position: fixed;
+			top: 20em;
+			left: 20em;
+			transition: all 3s;
+		}
+
+		@keyframes test {
+			50% {
+				left: 50em;
+			}
+
+			100% {
+				left: 20em;
+			}
+		}
+
+		.ani {
+			/* animation: test 3s; */
+			top: 30em !important;
+			left: 60em !important;
+		}
+
 	</style>
 </head>
 
@@ -31,6 +55,26 @@
 			btn.addEventListener('click', throttle((e) => {
 				console.log('btn');
 			}));
+
+			const ani = document.getElementById('ani');
+			ani.addEventListener('animationstart', function (e) {
+				console.log('start');
+			});
+			ani.addEventListener('animationiteration', function (e) {
+				console.log('iteration');
+			});
+			ani.addEventListener("animationend", function (e) {
+				console.log("end");
+			}, false);
+			ani.addEventListener("transitionstart", function (e) {
+				console.log('transitionstart');
+			});
+			ani.addEventListener("transitionrun", function (e) {
+				console.log("transitionrun")
+			});
+			ani.addEventListener("transitionend", function (e) {
+				console.log("transitionend");
+			});
 		}
 
 		window.addEventListener('hashchange', (e) => {
@@ -52,6 +96,12 @@
 			history.replaceState({
 				name: 's',
 			}, '', path);
+		}
+
+
+		function setAn() {
+			const ele = document.getElementById('ani');
+			ele.setAttribute('class', 'ani');
 		}
 
 		// let num = 0;
@@ -87,6 +137,9 @@
 		<p>b</p>
 	</a>
 	<button class="btn-disabled" disabled="true">禁用</button>
+
+	<span id="ani">哈哈哈</span>
+	<button onclick="setAn()">开始动画</button>
 </body>
 
 </html>

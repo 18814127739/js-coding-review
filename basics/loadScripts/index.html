@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>使用promise加载script脚本</title>
+
+  <style>
+    body {
+      height: 100vh;
+      margin: 0;
+    }
+
+  </style>
+
+  <script>
+    function load(src) {
+      return new Promise((resolve, reject) => {
+        const script = document.createElement('script');
+        script.type = 'text/javascript';
+        script.onload = function () {
+          resolve();
+        }
+        script.onerror = function () {
+          script.onload = script.onerror = null;
+          reject();
+        }
+        script.src = src;
+        document.head.appendChild(script);
+      });
+    }
+
+    function loadScripts(srcList, isAsync = false) {
+      if (isAsync) {
+        return Promise.all(srcList.map(c => load(c)));
+      } else {
+        return new Promise((resolve, reject) => {
+          function next() {
+            const src = srcList.shift();
+            if (!src) {
+              resolve();
+            } else {
+              load(src).then(next, reject);
+            }
+          }
+          next();
+        });
+      }
+    }
+
+    async function startLoad() {
+      await loadScripts(['./a.js', './b.js'], true);
+      console.log(name);
+    }
+
+  </script>
+</head>
+
+<body>
+  <button onclick="startLoad()">load scripts</button>
+</body>
+
+</html>
