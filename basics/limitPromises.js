@@ -5,20 +5,36 @@
  * @return {*}
  */
 
-function sendRequest(urls, limit, callback) {
-	const fetchArr = [];
+function limitPromise(arr, num) {
+	const pmsList = [];
+	let resolve;
+	const promise = new Promise((r) => {
+		resolve = r;
+	});
 
-	function _send() {
-		return fetch(urls.shift()).finally(() => {
-			if (urls.length) {
-				_send();
+	const run = () => {
+		return new Promise(r => {
+			setTimeout(() => {
+				const num = arr.shift();
+				console.log(num);
+				r();
+			}, 500);
+		}).finally(() => {
+			if (arr.length) {
+				run();
+			} else {
+				resolve('finish');
 			}
 		});
 	}
 
-	for (let i = 0; i < limit; i++) {
-		fetchArr.push(_send());
+	for (let i = 0; i < num; i++) {
+		pmsList.push(run());
 	}
 
-	return Promise.all(fetchArr).then(callback);
+	return promise;
 }
+
+const arr = new Array(22).fill(i => i).map((c, i) => i);
+const res = limitPromise(arr, 5).then(res => console.log(res));
+
