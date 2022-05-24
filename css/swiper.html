@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSS实现轮播</title>
+
+  <style>
+    body {
+      width: 100%;
+      height: 100vh;
+      background: #c3c3c3;
+    }
+
+    :root {
+      --speed: 2s;
+      --n: 6;
+      --h: 36;
+      --w: 260;
+    }
+
+    .wrap {
+      margin: 0 auto;
+      padding: 0 12px;
+      width: calc(var(--w) * 1px);
+      height: calc(var(--h) * 1px);
+      border-radius: calc(var(--h) / 2 * 1px);
+      background: rgba(255, 255, 255, .6);
+      overflow: hidden;
+    }
+
+    ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: flex;
+      /* 垂直 */
+      flex-direction: column;
+      /* 水平 */
+      /* flex-wrap: nowrap; */
+      animation: move calc(var(--speed) * 6) steps(var(--n)) infinite;
+    }
+
+    ul li {
+      line-height: calc(var(--h) * 1px);
+      width: 100%;
+      flex-shrink: 0;
+      text-align: center;
+      animation: liMove 2s infinite;
+    }
+
+    @keyframes move {
+      0% {
+        transform: translate(0, 0);
+      }
+
+      100% {
+        transform: translate(0, calc(var(--h) * var(--n) * -1px));
+        /* transform: translate(calc(var(--w) * var(--n) * -1px), 0); */
+      }
+    }
+
+    @keyframes liMove {
+      0% {
+        transform: translate(0, 0);
+      }
+
+      80%,
+      100% {
+        transform: translate(0, calc(var(--h) * -1px));
+        /* transform: translate(calc(var(--w) * -1px), 0); */
+      }
+    }
+
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <ul>
+      <li>用户123获得5元支付红包1</li>
+      <li>用户123获得5元支付红包2</li>
+      <li>用户123获得5元支付红包3</li>
+      <li>用户123获得5元支付红包4</li>
+      <li>用户123获得5元支付红包5</li>
+      <li>用户123获得5元支付红包6</li>
+      <li>用户123获得5元支付红包1</li>
+    </ul>
+  </div>
+</body>
+
+</html>
