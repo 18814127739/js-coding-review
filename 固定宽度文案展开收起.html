@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    #line {
+      width: 360px;
+      display: flex;
+    }
+
+    #expendIcon {
+      transform: rotateZ(90deg);
+    }
+
+    #hideIcon {
+      display: inline-block;
+      transform: rotateZ(-90deg);
+    }
+
+  </style>
+</head>
+
+<body>
+  <script>
+    window.onload = function () {
+      const el = document.getElementById('text');
+      const textH = el.getBoundingClientRect().height;
+      if (textH > 23) {
+        el.style.textOverflow = 'ellipsis';
+        el.style.overflow = 'hidden';
+        el.style.whiteSpace = 'nowrap';
+
+        const $line = document.getElementById('line');
+        const expendIcon = document.createElement('span');
+        expendIcon.innerHTML = '>';
+        expendIcon.id = 'expendIcon';
+        $line.appendChild(expendIcon);
+
+        expendIcon.onclick = function () {
+          el.style.textOverflow = '';
+          el.style.overflow = 'visible';
+          el.style.whiteSpace = '';
+
+          const hideIcon = document.createElement('span');
+          hideIcon.innerHTML = '>';
+          hideIcon.id = 'hideIcon';
+          el.appendChild(hideIcon);
+
+          hideIcon.onclick = function () {
+            el.style.textOverflow = 'ellipsis';
+            el.style.overflow = 'hidden';
+            el.style.whiteSpace = 'nowrap';
+            $line.appendChild(expendIcon);
+            hideIcon.remove();
+          }
+
+          expendIcon.remove();
+        }
+      }
+    }
+
+  </script>
+  <div id="line">
+    <div style="flex:1;" id="text">
+      13123万13123万13123万13123万13123万13123万13123万13123万1312313123万13123万13123万13123万13123万13123万13123万13123万13123万13123万万13123万
+      <!-- 13123万13123万 -->
+    </div>
+  </div>
+
+</body>
+
+</html>
